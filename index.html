@@ -211,6 +211,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes roll{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.strip .lane{animation:none;flex-wrap:wrap;width:auto}.strip ul[aria-hidden]{display:none}}
 
+
+.egg{display:grid;justify-items:center;text-align:center;gap:10px;padding-block:28px 8px}
+.egg::before{content:"";width:1px;height:46px;background:linear-gradient(var(--line),var(--gold))}
+.egg .q{font:500 clamp(1.15rem,2.4vw,1.6rem)/1.35 var(--display);color:var(--fg);max-width:34ch;text-wrap:balance}
+.egg .q em{font-style:italic;color:var(--gold)}
+.egg .then{font:500 .8rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
 footer{border-top:1px solid var(--line);padding-block:32px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.85rem}
 </style>
@@ -406,6 +413,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
         <div class="cta" style="margin-top:4px"><a class="btn" href="mailto:idare.mediastudio@gmail.com" data-i="e.btn">Write to me</a><a class="btn ghost" href="https://www.linkedin.com/in/aidar-rizatdinov-326237200/" target="_blank" rel="noopener">LinkedIn</a></div>
       </div>
       <div class="strip"><div class="lane"><ul><li>EA</li><li>Fever</li><li>SOFTGAMES</li><li>Scopely</li><li>Mastercard</li><li>Fortis Games</li><li>Uber</li><li>Gameloft</li><li>Eneba</li><li>Meta</li><li>Logitech</li><li>Wargaming</li></ul><ul aria-hidden="true"><li>EA</li><li>Fever</li><li>SOFTGAMES</li><li>Scopely</li><li>Mastercard</li><li>Fortis Games</li><li>Uber</li><li>Gameloft</li><li>Eneba</li><li>Meta</li><li>Logitech</li><li>Wargaming</li></ul></div></div>
+      <div class="egg">
+        <p class="q" data-i="egg.q" data-html>All of them found my skills, resume and background <em>"very impressive"</em>.</p>
+        <p class="then" data-i="egg.t">Then they went with other candidates. Your move.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -444,7 +455,7 @@ const V=[
  ["qPmca7LobIE","Surviving Mars: Relaunched","sale"]
 ];
 const T={es:{
-"nav.creds":"Credenciales",
+"nav.creds":"Credenciales","egg.q":"A todas les parecieron <em>\"muy impresionantes\"</em> mis habilidades, mi CV y mi trayectoria.","egg.t":"Luego eligieron a otros candidatos. Te toca.",
 "r.kick":"Recomendaciones y certificaciones","r.h2":"Lo que dicen de mí y lo que he demostrado",
 "r.q1":"Mis responsables en Paradox Interactive me han trasladado que valoran mucho mis habilidades de creación de contenido y la calidad de mi trabajo.",
 "r.w1":"Feedback de mis responsables",
