@@ -4,18 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aidar Rizatdinov | Trailers and short-form for games</title>
-<meta name="description" content="Aidar Rizatdinov, producer and video creator in Madrid. Trailers, sale videos and short-form campaigns for Hearts of Iron IV, Victoria 3 and other Paradox Interactive games.">
-<meta property="og:title" content="Aidar Rizatdinov | Trailers and short-form for games">
-<meta property="og:description" content="25 videos for Paradox Interactive games. Trailers, sale videos and short-form campaigns, made from concept to delivery.">
+<meta name="description" content="Aidar Rizatdinov, producer and video creator in Madrid. 25 trailers, sale videos and short-form campaigns for Paradox Interactive games.">
+<meta property="og:title" content="Aidar Rizatdinov | Trailers and short-form for strategy games">
+<meta property="og:description" content="25 videos for Paradox Interactive games, made from concept to delivery. Producer and video creator in Madrid.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://idaremedia.github.io/">
+<meta property="og:image" content="https://idaremedia.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d0f14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f14'/%3E%3Cpath d='M6 12V6h6M20 6h6v6M26 20v6h-6M12 26H6v-6' stroke='%23e8b04b' stroke-width='2.5' fill='none'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23d9412b'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: an edit suite. Dark viewer, gold markers, timecode labels; one column of sections, video bins as 9:16 grids. */
+/* Layout: an edit suite. Sticky timeline with playhead tracks scroll; viewfinder hero with a live short; video bins open a full-screen player. */
 :root{
-  --bg:#0d0f14; --panel:#151821; --line:#262a35; --fg:#f4f1ea; --muted:#a6a29a;
+  --bg:#0d0f14; --panel:#151821; --panel2:#1b1f2a; --line:#262a35; --fg:#f4f1ea; --soft:#d8d4cc; --muted:#a6a29a;
   --gold:#e8b04b; --gold-soft:#e8b04b22; --rec:#d9412b;
   --display:"Fraunces", Georgia, "Times New Roman", serif;
   --body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -23,301 +29,503 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before{transition:none!important;animation:none!important}}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:var(--gold);text-underline-offset:3px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.tc{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
-h2{font-size:clamp(1.9rem,4vw,2.8rem)}
-h3{font-size:1.35rem}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.tc{font-family:var(--mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.06;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+h3{font-size:1.3rem}
 p{margin:0}
-section{padding-block:clamp(56px,9vw,104px);border-top:1px solid var(--line)}
-.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;max-width:680px}
+section{padding-block:clamp(60px,9vw,110px);border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:38px;max-width:700px}
+.sec-head p{color:var(--muted)}
 
-/* top bar */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#0d0f14e6;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--fg);text-decoration:none}
-.nav{display:flex;gap:22px}
-.nav a{color:var(--muted);text-decoration:none;font-size:.92rem}
-.nav a:hover{color:var(--fg)}
-@media (max-width:620px){.nav a.opt{display:none}}
+/* ===== timeline bar ===== */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:var(--bg)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#0d0f14eb;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:12px 8px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--fg);text-decoration:none;white-space:nowrap}
+.right{display:flex;align-items:center;gap:14px}
+.clock{font:500 .8rem var(--mono);color:var(--fg);display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+.clock::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rec);animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:600 .72rem var(--mono);letter-spacing:.06em;background:transparent;color:var(--muted);border:0;padding:6px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--gold);color:var(--bg)}
+.track{position:relative;display:flex;gap:3px;padding-bottom:10px}
+.track a{flex:var(--w,1);position:relative;height:22px;border-radius:3px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);text-decoration:none;font:500 .66rem var(--mono);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;padding-inline:7px;overflow:hidden;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.track a:hover{color:var(--fg);border-color:#3a3f4c}
+.track a.on{background:#e8b04b2e;border-color:#e8b04b88;color:var(--fg)}
+.playhead{position:absolute;top:-4px;bottom:6px;width:2px;background:var(--rec);left:0;pointer-events:none;box-shadow:0 0 0 1px #0d0f14}
+.playhead::before{content:"";position:absolute;top:-3px;left:-5px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid var(--rec)}
+@media (max-width:560px){.clock{display:none}.track a{font-size:0;padding:0}}
 
-/* hero: a viewfinder */
-.hero{padding-block:clamp(48px,8vw,96px) clamp(48px,7vw,80px)}
-.frame{position:relative;padding:clamp(28px,5vw,56px)}
-.frame i{position:absolute;width:34px;height:34px;border:0 solid var(--gold);opacity:.9}
-.frame i:nth-child(1){top:0;left:0;border-top-width:3px;border-left-width:3px}
-.frame i:nth-child(2){top:0;right:0;border-top-width:3px;border-right-width:3px}
-.frame i:nth-child(3){bottom:0;left:0;border-bottom-width:3px;border-left-width:3px}
-.frame i:nth-child(4){bottom:0;right:0;border-bottom-width:3px;border-right-width:3px}
-.rec{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-bottom:28px}
-.rec .dot{display:inline-flex;align-items:center;gap:8px}
-.rec .dot::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--rec);animation:blink 1.6s steps(2) infinite}
-@keyframes blink{50%{opacity:.25}}
-.hero h1{font-size:clamp(2.6rem,7.2vw,5.4rem);letter-spacing:-.01em}
+/* ===== hero ===== */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(40px,7vw,88px) clamp(36px,5vw,56px)}
+.frame{position:relative;padding:clamp(24px,4vw,48px)}
+.frame>i{position:absolute;width:34px;height:34px;border:0 solid var(--gold)}
+.frame>i:nth-child(1){top:0;left:0;border-top-width:3px;border-left-width:3px}
+.frame>i:nth-child(2){top:0;right:0;border-top-width:3px;border-right-width:3px}
+.frame>i:nth-child(3){bottom:0;left:0;border-bottom-width:3px;border-left-width:3px}
+.frame>i:nth-child(4){bottom:0;right:0;border-bottom-width:3px;border-right-width:3px}
+.hero .kick{margin-bottom:22px;color:var(--gold)}
+.hero h1{font-size:clamp(2.5rem,6.4vw,5rem);letter-spacing:-.01em}
 .hero h1 em{font-style:normal;color:var(--gold)}
-.lede{margin-top:22px;max-width:60ch;color:#d8d4cc;font-size:clamp(1.02rem,1.6vw,1.15rem)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--gold);color:var(--bg);background:var(--gold);cursor:pointer;font-family:var(--body)}
+.lede{margin-top:22px;max-width:56ch;color:var(--soft);font-size:clamp(1.02rem,1.5vw,1.14rem)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font:600 .95rem var(--body);text-decoration:none;border:1px solid var(--gold);color:var(--bg);background:var(--gold);cursor:pointer}
 .btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
 .btn.ghost:hover{border-color:var(--gold)}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:44px}
-.stat{background:var(--bg);padding:20px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.stat b{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,2.3rem);color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+.btn svg{width:16px;height:16px}
+.reel{position:relative;justify-self:center;width:min(100%,330px)}
+.phone{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:var(--panel2);border:1px solid #333847;box-shadow:0 30px 80px -30px #e8b04b40,0 0 0 8px #151821}
+.phone iframe,.phone img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.phone .ov{position:absolute;inset:auto 0 0 0;padding:14px;background:linear-gradient(transparent,#0d0f14e6);display:flex;justify-content:space-between;align-items:end;gap:8px}
+.reel .lbl{position:absolute;top:-30px;left:0;right:0;display:flex;justify-content:space-between}
+.reel .lbl .rec{color:var(--fg);display:flex;align-items:center;gap:6px}
+.reel .lbl .rec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rec);animation:blink 1.6s steps(2) infinite}
+.unmute{font:600 .74rem var(--body);background:#0d0f14cc;color:var(--fg);border:1px solid var(--line);padding:7px 12px;border-radius:999px;cursor:pointer}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.reel{width:min(72%,300px);margin-top:36px}}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stat{background:var(--bg);padding:22px 20px;display:grid;gap:6px;min-width:0}
+.stat b{font-family:var(--display);font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
 .stat span{color:var(--muted);font-size:.88rem;line-height:1.4}
 @media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.games{margin-top:26px}
+.games{margin-top:22px;margin-bottom:clamp(40px,6vw,72px)}
+.plat{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.plat span{font:500 .72rem var(--mono);letter-spacing:.05em;color:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
 
-/* featured case studies */
+/* ===== featured ===== */
 .cases{display:grid;gap:18px}
-.case{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding:28px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
-.case .meta{display:flex;flex-direction:column;gap:8px}
-.case .meta .tc{color:var(--gold)}
+.case{display:grid;grid-template-columns:240px minmax(0,1fr);gap:30px;padding:30px;background:var(--panel);border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden}
+.case::after{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--c,var(--gold))}
+.case .meta{display:grid;gap:10px;align-content:start}
+.case .meta .tc{color:var(--c,var(--gold))}
 .case .body{display:grid;gap:14px;min-width:0}
-.case .body p{color:#d8d4cc;max-width:66ch}
+.case .body p{color:var(--soft);max-width:66ch}
 .case .body p b{color:var(--fg);font-weight:600}
-@media (max-width:760px){.case{grid-template-columns:1fr;gap:16px;padding:22px}}
+.case .take{font-family:var(--display);font-size:1.12rem;color:var(--fg);border-left:2px solid var(--line);padding-left:14px}
+@media (max-width:760px){.case{grid-template-columns:1fr;gap:16px;padding:24px}}
 
-/* the work: bins */
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.tab{font:500 .92rem var(--body);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
-.tab[aria-selected="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--fg)}
-.bin{margin-bottom:40px}
+/* ===== work ===== */
+.filters{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:28px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:500 .9rem var(--body);padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--fg)}
+.bin{margin-bottom:44px}
 .bin-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;flex-wrap:wrap}
-.bin-head h3{font-size:1.25rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:16px}
-@media (max-width:420px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
-.clip{display:flex;flex-direction:column;gap:8px;min-width:0}
-.player{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:10px;overflow:hidden;background:#1b1f2a;border:1px solid var(--line)}
-.player button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}
-.player img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease,opacity .35s}
-.player button:hover img{transform:scale(1.04);opacity:.85}
-.player .play{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:#0d0f14b3;border:1.5px solid var(--gold);display:grid;place-items:center}
-.player .play::after{content:"";margin-left:4px;border-left:15px solid var(--gold);border-top:10px solid transparent;border-bottom:10px solid transparent}
-.player .badge{position:absolute;left:8px;top:8px;font:500 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;background:#0d0f14cc;color:var(--fg);padding:3px 7px;border-radius:4px}
-.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.clip .cap{font-size:.86rem;color:#d8d4cc;line-height:1.35}
-.clip .cap a{color:var(--muted);font-size:.78rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
+@media (max-width:440px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+.clip{all:unset;cursor:pointer;display:grid;gap:9px;min-width:0}
+.thumb{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:12px;overflow:hidden;background:var(--panel2);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+.clip:hover .thumb{border-color:var(--gold);transform:translateY(-3px)}
+.clip:focus-visible .thumb{outline:2px solid var(--gold);outline-offset:3px}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .badge{position:absolute;left:8px;top:8px;font:500 .64rem var(--mono);letter-spacing:.06em;text-transform:uppercase;background:#0d0f14d0;color:var(--fg);padding:3px 7px;border-radius:4px}
+.thumb .play{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#0d0f14b3;border:1.5px solid var(--gold);display:grid;place-items:center;transition:transform .2s}
+.clip:hover .play{transform:scale(1.08)}
+.thumb .play::after{content:"";margin-left:4px;border-left:15px solid var(--gold);border-top:10px solid transparent;border-bottom:10px solid transparent}
+.thumb .n{position:absolute;right:8px;bottom:8px;font:500 .66rem var(--mono);color:var(--soft);background:#0d0f14b3;padding:2px 6px;border-radius:4px}
+.clip .cap{font-size:.86rem;color:var(--soft);line-height:1.35}
 
-/* process */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
-.step{border-top:2px solid var(--gold);padding-top:16px;display:grid;gap:8px;min-width:0}
+/* ===== player ===== */
+.player{position:fixed;inset:0;z-index:60;background:#07080b;display:grid;grid-template-rows:auto 1fr auto;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.player[hidden]{display:none}
+.p-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 6px 12px}
+.p-title{display:grid;gap:2px;min-width:0}
+.p-title b{font-family:var(--display);font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.x{font:600 .9rem var(--body);background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.stage{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;min-height:0}
+.screen{justify-self:center;height:100%;max-height:calc(100dvh - 160px);aspect-ratio:9/16;max-width:100%;border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--line);position:relative}
+.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.nav-b{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:1.3rem;cursor:pointer;display:grid;place-items:center}
+.nav-b:hover{border-color:var(--gold)}
+.p-bot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 6px 2px;flex-wrap:wrap}
+@media (max-width:640px){.stage{grid-template-columns:minmax(0,1fr)}.nav-b{display:none}.screen{max-height:calc(100dvh - 150px)}}
+
+/* ===== process ===== */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.step{border-top:2px solid var(--gold);padding-top:16px;display:grid;gap:8px;align-content:start;min-width:0}
 .step .tc{color:var(--gold)}
-.step p{color:#d8d4cc;font-size:.95rem}
+.step p{color:var(--soft);font-size:.95rem}
 @media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:460px){.steps{grid-template-columns:1fr}}
 
-/* about */
+/* ===== about ===== */
 .about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:start}
-.about .text{display:grid;gap:16px;color:#d8d4cc;max-width:66ch}
-.kit{display:grid;gap:10px;margin-top:8px}
-.kit div{font-size:.95rem}
-.kit b{color:var(--fg);font-weight:600}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;display:grid;gap:16px}
-.photo{aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:#1b1f2a}
+.about .text{display:grid;gap:16px;color:var(--soft);max-width:66ch}
+.kit{display:grid;gap:12px;margin-top:6px}
+.kit div{display:grid;gap:6px}
+.kit .row{display:flex;flex-wrap:wrap;gap:6px}
+.kit .row span{font-size:.84rem;color:var(--fg);background:var(--panel);border:1px solid var(--line);padding:4px 10px;border-radius:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:16px;position:sticky;top:120px}
+.photo{aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:var(--panel2)}
 .photo img{width:100%;height:100%;object-fit:cover}
-.contact{display:grid;gap:10px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.mail{font-family:var(--mono);font-size:.9rem;user-select:all;word-break:break-all}
+.contact{display:grid;gap:12px}
+.mailrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.mail{font-family:var(--mono);font-size:.86rem;user-select:all;word-break:break-all}
 .copy{font:500 .8rem var(--body);background:transparent;border:1px solid var(--line);color:var(--fg);padding:6px 12px;border-radius:999px;cursor:pointer}
 .copy:hover{border-color:var(--gold)}
-@media (max-width:820px){.about{grid-template-columns:1fr}}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px}
+@media (max-width:860px){.about{grid-template-columns:1fr}.card{position:static}}
 
-footer{border-top:1px solid var(--line);padding-block:36px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+/* ===== closing ===== */
+.end{text-align:left}
+.end .frame{display:grid;gap:18px}
+.end h2{font-size:clamp(2rem,5vw,3.4rem)}
+footer{border-top:1px solid var(--line);padding-block:32px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.85rem}
 </style>
 </head>
 <body>
 
 <header class="bar">
   <div class="wrap">
-    <a class="brand" href="#top">Aidar Rizatdinov</a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#featured" class="opt">Featured</a>
-      <a href="#work">Work</a>
-      <a href="#process" class="opt">Process</a>
-      <a href="#about">About</a>
+    <div class="top">
+      <a class="brand" href="#top">Aidar Rizatdinov</a>
+      <div class="right">
+        <span class="clock" id="clock" aria-hidden="true">00:00:00:00</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" id="lang-en" data-l="en" aria-pressed="true">EN</button>
+          <button type="button" id="lang-es" data-l="es" aria-pressed="false">ES</button>
+        </div>
+      </div>
+    </div>
+    <nav class="track" id="track" aria-label="Sections">
+      <a href="#top" data-s="top" style="--w:1.2" data-i="nav.intro">Intro</a>
+      <a href="#featured" data-s="featured" style="--w:1.6" data-i="nav.featured">Featured</a>
+      <a href="#work" data-s="work" style="--w:3" data-i="nav.work">The work</a>
+      <a href="#process" data-s="process" style="--w:.9" data-i="nav.process">Process</a>
+      <a href="#about" data-s="about" style="--w:1.3" data-i="nav.about">About</a>
+      <span class="playhead" id="playhead"></span>
     </nav>
   </div>
 </header>
 
-<main id="top">
-  <div class="wrap hero">
+<main>
+  <div id="top" class="wrap hero" data-sec>
     <div class="frame">
       <i></i><i></i><i></i><i></i>
-      <div class="rec tc"><span class="dot">REC</span><span>Madrid · open to new roles</span></div>
-      <h1>Trailers and short-form<br><em>for strategy games</em></h1>
-      <p class="lede">I am a producer and video creator at Paradox Interactive. Every video on this page I made myself, from concept and script to edit, approvals and delivery against fixed release and sale dates.</p>
+      <p class="kick tc" data-i="hero.kick">Producer and video creator · Madrid</p>
+      <h1 data-i="hero.h1" data-html>Trailers and short-form <em>for strategy games</em></h1>
+      <p class="lede" data-i="hero.lede">I make trailers, sale videos and short-form campaigns for Paradox Interactive games. Every video on this page I made myself, from concept and script to edit, approvals and delivery against fixed release and sale dates.</p>
       <div class="cta">
-        <a class="btn" href="#work">Watch the work</a>
-        <a class="btn ghost" href="Aidar-Rizatdinov-CV.pdf">Download CV</a>
-        <a class="btn ghost" href="#about">Contact</a>
+        <a class="btn" href="#work" data-i="hero.watch">Watch the work</a>
+        <a class="btn ghost" href="Aidar-Rizatdinov-CV.pdf" data-i="hero.cv">Download CV</a>
+        <a class="btn ghost" href="#about" data-i="hero.contact">Get in touch</a>
       </div>
     </div>
-
-    <div class="stats" role="list">
-      <div class="stat" role="listitem"><b>25</b><span>videos made for Paradox games</span></div>
-      <div class="stat" role="listitem"><b>170K+</b><span>YouTube views on launch and sale trailers</span></div>
-      <div class="stat" role="listitem"><b>500K</b><span>views on the Hearts of Iron IV record campaign</span></div>
-      <div class="stat" role="listitem"><b>0 → 1</b><span>Victoria 3 TikTok channel launched from zero</span></div>
+    <div class="reel">
+      <div class="lbl tc"><span class="rec">Showreel</span><span id="reel-n">01 / 25</span></div>
+      <div class="phone" id="phone">
+        <img id="reel-img" alt="" src="https://i.ytimg.com/vi/_MkENkUR9uQ/hqdefault.jpg" onerror="this.style.visibility='hidden'">
+        <div class="ov"><span class="tc" id="reel-cap" style="color:var(--fg)">Hearts of Iron IV</span><button class="unmute" type="button" id="reel-open" data-i="hero.full">Watch with sound</button></div>
+      </div>
     </div>
-    <p class="games tc">Hearts of Iron IV · Victoria 3 · Afterworld · previously Crusader Kings III and Surviving Mars: Relaunched</p>
   </div>
 
-  <section id="featured">
+  <div class="wrap">
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><b data-count="25">25</b><span data-i="st.1">videos made for Paradox games</span></div>
+      <div class="stat" role="listitem"><b data-count="170" data-suf="K+">170K+</b><span data-i="st.2">YouTube views on launch and sale trailers</span></div>
+      <div class="stat" role="listitem"><b data-count="500" data-suf="K">500K</b><span data-i="st.3">views on the Hearts of Iron IV record campaign</span></div>
+      <div class="stat" role="listitem"><b>0 → 1</b><span data-i="st.4">Victoria 3 TikTok channel launched from zero</span></div>
+    </div>
+    <p class="games tc" data-i="hero.games">Hearts of Iron IV · Victoria 3 · Afterworld · previously Crusader Kings III and Surviving Mars: Relaunched</p>
+  </div>
+
+  <section id="featured" data-sec>
     <div class="wrap">
       <div class="sec-head">
-        <span class="tc">Featured work</span>
-        <h2>Three projects, and what each one taught me</h2>
+        <span class="tc" data-i="f.kick">Featured work</span>
+        <h2 data-i="f.h2">Three projects, and what each one taught me</h2>
       </div>
       <div class="cases">
-        <article class="case">
-          <div class="meta"><span class="tc">Hearts of Iron IV</span><h3>A four-episode comedy series on a 20-hour week</h3></div>
+        <article class="case" style="--c:#e8b04b">
+          <div class="meta"><span class="tc">Hearts of Iron IV</span><h3 data-i="c1.h">A four-episode comedy series on a 20-hour week</h3></div>
           <div class="body">
-            <p><b>The idea.</b> Strategy players spend hundreds of hours on serious world-war campaigns, then share the most absurd things that happened in them. The side stories in the Yakuza games prove a serious world becomes more loved when you let it be ridiculous for ten minutes. So instead of explaining the game, the series told the stories players already tell each other: "I Got Reincarnated as a Field Marshal and Now I'm Stuck on a Beach".</p>
-            <p><b>What I did.</b> Concept, script, visual approach, edit and publishing for all four episodes, alongside the regular trailer schedule.</p>
-            <p><b>What I learned.</b> Episodes that open on a moment players have lived themselves land faster than ones that need context, so every brief since starts with a recognisable first three seconds.</p>
+            <p data-i="c1.a" data-html><b>The idea.</b> Strategy players spend hundreds of hours on serious world-war campaigns, then share the most absurd things that happened in them. The side stories in the Yakuza games prove a serious world becomes more loved when you let it be ridiculous for ten minutes. So instead of explaining the game, the series told the stories players already tell each other: "I Got Reincarnated as a Field Marshal and Now I'm Stuck on a Beach".</p>
+            <p data-i="c1.b" data-html><b>What I did.</b> Concept, script, visual approach, edit and publishing for all four episodes, alongside the regular trailer schedule.</p>
+            <p class="take" data-i="c1.c">Episodes that open on a moment players have lived themselves land faster than ones that need context, so every brief since starts with a recognisable first three seconds.</p>
           </div>
         </article>
-        <article class="case">
-          <div class="meta"><span class="tc">Hearts of Iron IV</span><h3>Anniversary Sale: finding the hook in a ten-year-old trailer</h3></div>
+        <article class="case" style="--c:#d9412b">
+          <div class="meta"><span class="tc">Hearts of Iron IV</span><h3 data-i="c2.h">Anniversary Sale: finding the hook in a ten-year-old trailer</h3></div>
           <div class="body">
-            <p><b>The problem.</b> The sale short had the DLC animation, official trailers and gameplay, but the opening felt weak.</p>
-            <p><b>What I did.</b> I went back through every official Hearts of Iron IV trailer to the 2016 announcement. The very first one ran real footage under a Churchill speech, so I kept only the speech as the tension build for the new short.</p>
-            <p><b>What I learned.</b> Your own archive is full of hooks, and every hook makes a promise: some viewers read it as a Hearts of Iron V announcement, a reminder to know exactly what the first seconds tell people.</p>
+            <p data-i="c2.a" data-html><b>The problem.</b> The sale short had the DLC animation, official trailers and gameplay, but the opening felt weak.</p>
+            <p data-i="c2.b" data-html><b>What I did.</b> I went back through every official Hearts of Iron IV trailer to the 2016 announcement. The very first one ran real footage under a Churchill speech, so I kept only the speech as the tension build for the new short.</p>
+            <p class="take" data-i="c2.c">Your own archive is full of hooks, and every hook makes a promise: some viewers read it as a Hearts of Iron V announcement, a reminder to know exactly what the first seconds tell people.</p>
           </div>
         </article>
-        <article class="case">
-          <div class="meta"><span class="tc">Victoria 3</span><h3>Launching a TikTok channel from zero</h3></div>
+        <article class="case" style="--c:#6fa8c7">
+          <div class="meta"><span class="tc">Victoria 3</span><h3 data-i="c3.h">Launching a TikTok channel from zero</h3></div>
           <div class="body">
-            <p><b>The start.</b> The first video was an engagement piece to say hello to players, then the channel found its rhythm in sale videos with an entertaining twist and announcements of every kind, including the open beta.</p>
-            <p><b>What worked best.</b> Trains. A video about the railways of Victoria 3 for Steam's Train Fest brought more engagement than anything else on the channel: a game about economies and politics becomes exciting in thirty seconds the moment you find the thing its players already love talking about.</p>
-            <p><b>What I would change.</b> Give Victoria 3 its own engagement content and the same focus as Hearts of Iron IV, instead of mostly content that travels with a sale.</p>
+            <p data-i="c3.a" data-html><b>The start.</b> The first video was an engagement piece to say hello to players, then the channel found its rhythm in sale videos with an entertaining twist and announcements of every kind, including the open beta.</p>
+            <p data-i="c3.b" data-html><b>What worked best.</b> Trains. A video about the railways of Victoria 3 for Steam's Train Fest brought more engagement than anything else on the channel.</p>
+            <p class="take" data-i="c3.c">A game about economies and politics becomes exciting in thirty seconds the moment you find the thing its players already love talking about.</p>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="work">
+  <section id="work" data-sec>
     <div class="wrap">
       <div class="sec-head">
-        <span class="tc">The work · 25 videos</span>
-        <h2>Sale trailers and content videos</h2>
-        <p style="color:var(--muted)">Published on Paradox channels across YouTube Shorts, TikTok and Instagram Reels. Tap a video to play it here.</p>
+        <span class="tc" data-i="w.kick">The work · 25 videos</span>
+        <h2 data-i="w.h2">Sale trailers and content videos</h2>
+        <p data-i="w.p">Published on Paradox channels across YouTube Shorts, TikTok and Instagram Reels. Open any video to watch it full screen, then swipe or use the arrow keys for the next one.</p>
       </div>
-      <div class="tabs" role="tablist" aria-label="Filter videos">
-        <button class="tab" role="tab" id="tab-all" aria-selected="true" data-f="all">All</button>
-        <button class="tab" role="tab" id="tab-sale" aria-selected="false" data-f="sale">Sale trailers</button>
-        <button class="tab" role="tab" id="tab-content" aria-selected="false" data-f="content">Content videos</button>
+      <div class="filters">
+        <div class="chips" role="group" aria-label="Type">
+          <button class="chip" type="button" id="f-all" data-f="all" aria-pressed="true" data-i="w.all">All</button>
+          <button class="chip" type="button" id="f-sale" data-f="sale" aria-pressed="false" data-i="w.sale">Sale trailers</button>
+          <button class="chip" type="button" id="f-content" data-f="content" aria-pressed="false" data-i="w.content">Content videos</button>
+        </div>
+        <button class="btn ghost" type="button" id="playall"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span data-i="w.reel">Play as a reel</span></button>
       </div>
       <div id="bins"></div>
     </div>
   </section>
 
-  <section id="process">
+  <section id="process" data-sec>
     <div class="wrap">
       <div class="sec-head">
-        <span class="tc">How I work</span>
-        <h2>From brief to the next brief</h2>
+        <span class="tc" data-i="p.kick">How I work</span>
+        <h2 data-i="p.h2">From brief to the next brief</h2>
       </div>
       <div class="steps">
-        <div class="step"><span class="tc">Step 1</span><h3>Brief</h3><p>What the sale, launch or community moment needs to achieve, and for whom.</p></div>
-        <div class="step"><span class="tc">Step 2</span><h3>Concept and script</h3><p>One clear idea and a hook players recognise in the first three seconds.</p></div>
-        <div class="step"><span class="tc">Step 3</span><h3>Edit and platform cuts</h3><p>Built separately for YouTube, TikTok and Instagram, inside brand guidelines.</p></div>
-        <div class="step"><span class="tc">Step 4</span><h3>Ship and measure</h3><p>Approvals with marketing, community and development, then the numbers decide the next video.</p></div>
+        <div class="step"><span class="tc" data-i="p.s1">Step 1</span><h3 data-i="p.t1">Brief</h3><p data-i="p.d1">What the sale, launch or community moment needs to achieve, and for whom.</p></div>
+        <div class="step"><span class="tc" data-i="p.s2">Step 2</span><h3 data-i="p.t2">Concept and script</h3><p data-i="p.d2">One clear idea and a hook players recognise in the first three seconds.</p></div>
+        <div class="step"><span class="tc" data-i="p.s3">Step 3</span><h3 data-i="p.t3">Edit and platform cuts</h3><p data-i="p.d3">Built separately for YouTube, TikTok and Instagram, inside brand guidelines.</p></div>
+        <div class="step"><span class="tc" data-i="p.s4">Step 4</span><h3 data-i="p.t4">Ship and measure</h3><p data-i="p.d4">Approvals with marketing, community and development, then the numbers decide the next video.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="about">
+  <section id="about" data-sec>
     <div class="wrap about">
       <div>
-        <div class="sec-head"><span class="tc">About</span><h2>Aidar Rizatdinov</h2></div>
+        <div class="sec-head"><span class="tc" data-i="a.kick">About</span><h2>Aidar Rizatdinov</h2></div>
         <div class="text">
-          <p>Producer and content creator at Paradox Interactive since December 2025. I own content creation and publishing for Hearts of Iron IV, Victoria 3 and Afterworld, and previously Crusader Kings III and Surviving Mars: Relaunched. My work includes launch and sale trailers, the four-episode Hearts of Iron IV comedy series and the Victoria 3 TikTok channel. I take each video from concept to published release, and track the results to make the next one better.</p>
-          <p>Before Paradox, I was Deputy and Acting Director at Estrella Clima Profesional, where I led supplier negotiations with brands like Daikin, Mitsubishi and Samsung and built the web and lead-generation systems that raised leads by 75%. In parallel I ran campaigns for five companies in Switzerland, Spain and Germany at SwissExistent.</p>
+          <p data-i="a.p1">Producer and content creator at Paradox Interactive since December 2025. I own content creation and publishing for Hearts of Iron IV, Victoria 3 and Afterworld, and previously Crusader Kings III and Surviving Mars: Relaunched. My work includes launch and sale trailers, the four-episode Hearts of Iron IV comedy series and the Victoria 3 TikTok channel, posted across TikTok, YouTube, Instagram, Facebook, Threads, X and Bluesky.</p>
+          <p data-i="a.p2">Before Paradox, I was Deputy and Acting Director at Estrella Clima Profesional, where I led supplier negotiations with brands like Daikin, Mitsubishi and Samsung and built the web and lead-generation systems that raised leads by 75%. In parallel I ran campaigns for five companies in Switzerland, Spain and Germany at SwissExistent.</p>
           <div class="kit">
-            <div><b>Production:</b> PMP certified · project planning · Jira · Asana</div>
-            <div><b>Editing:</b> Premiere Pro · After Effects · DaVinci Resolve · CapCut · Canva · Photoshop · Illustrator</div>
-            <div><b>Platforms:</b> YouTube · TikTok · Instagram · Facebook · Threads · X · Bluesky</div>
-            <div><b>Languages:</b> English C2 · Russian C2 · Spanish C1 · German A2</div>
+            <div><span class="tc" data-i="a.k1">Production</span><div class="row"><span>PMP</span><span data-i="a.plan">Project planning</span><span>Jira</span><span>Asana</span></div></div>
+            <div><span class="tc" data-i="a.k2">Editing</span><div class="row"><span>Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span><span>CapCut</span><span>Photoshop</span><span>Illustrator</span><span>Canva</span></div></div>
+            <div><span class="tc" data-i="a.k3">Platforms</span><div class="row"><span>YouTube</span><span>TikTok</span><span>Instagram</span><span>Facebook</span><span>Threads</span><span>X</span><span>Bluesky</span></div></div>
+            <div><span class="tc" data-i="a.k4">Languages</span><div class="row"><span data-i="a.en">English C2</span><span data-i="a.ru">Russian C2</span><span data-i="a.es">Spanish C1</span><span data-i="a.de">German A2</span></div></div>
           </div>
         </div>
       </div>
       <aside class="card" aria-label="Contact">
-        <div class="photo"><img src="photo.jpg" alt="Aidar Rizatdinov" onerror="this.parentNode.hidden=true"></div>
-        <h3>Get in touch</h3>
-        <p style="color:#d8d4cc">Open to producer and video roles, onsite in Madrid or remote, and to freelance trailer work.</p>
+        <div class="photo" id="photo"><img src="photo.jpg" alt="Aidar Rizatdinov" onerror="document.getElementById('photo').hidden=true"></div>
+        <h3 data-i="a.touch">Get in touch</h3>
+        <p style="color:var(--soft)" data-i="a.open">Open to producer and video roles, onsite in Madrid or remote, and to freelance trailer work.</p>
         <div class="contact">
-          <div class="row"><span class="mail" id="mail">idare.mediastudio@gmail.com</span><button class="copy" id="copy" type="button">Copy</button></div>
-          <div class="row"><a href="mailto:idare.mediastudio@gmail.com">Email me</a><a href="https://www.linkedin.com/in/aidar-rizatdinov-326237200/" target="_blank" rel="noopener">LinkedIn</a><a href="https://hitmarker.net/idare-mediastudio" target="_blank" rel="noopener">Hitmarker</a><a href="Aidar-Rizatdinov-CV.pdf">CV (PDF)</a></div>
+          <div class="mailrow"><span class="mail" id="mail">idare.mediastudio@gmail.com</span><button class="copy" id="copy" type="button" data-i="a.copy">Copy</button></div>
+          <div class="links"><a href="mailto:idare.mediastudio@gmail.com" data-i="a.email">Email me</a><a href="https://www.linkedin.com/in/aidar-rizatdinov-326237200/" target="_blank" rel="noopener">LinkedIn</a><a href="https://hitmarker.net/idare-mediastudio" target="_blank" rel="noopener">Hitmarker</a><a href="Aidar-Rizatdinov-CV.pdf" data-i="a.cv">CV (PDF)</a></div>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap end">
+      <div class="frame"><i></i><i></i><i></i><i></i>
+        <span class="tc" style="color:var(--gold)" data-i="e.kick">Cut to black</span>
+        <h2 data-i="e.h2">Got a game that needs a trailer, or a team that needs a producer?</h2>
+        <div class="cta" style="margin-top:4px"><a class="btn" href="mailto:idare.mediastudio@gmail.com" data-i="e.btn">Write to me</a><a class="btn ghost" href="https://www.linkedin.com/in/aidar-rizatdinov-326237200/" target="_blank" rel="noopener">LinkedIn</a></div>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>© 2026 Aidar Rizatdinov · Madrid</span><span>All videos made by me for Paradox Interactive games. Game titles belong to their owners.</span></div>
+  <div class="wrap"><span>© 2026 Aidar Rizatdinov · Madrid</span><span data-i="foot">All videos made by me for Paradox Interactive games. Game titles belong to their owners.</span></div>
 </footer>
+
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="p-top">
+    <div class="p-title"><span class="tc" id="p-game"></span><b id="p-name"></b></div>
+    <button class="x" type="button" id="p-close" data-i="pl.close">Close</button>
+  </div>
+  <div class="stage">
+    <button class="nav-b" type="button" id="p-prev" aria-label="Previous video">‹</button>
+    <div class="screen" id="screen"></div>
+    <button class="nav-b" type="button" id="p-next" aria-label="Next video">›</button>
+  </div>
+  <div class="p-bot"><span class="tc" id="p-count"></span><a id="p-yt" class="tc" target="_blank" rel="noopener" style="color:var(--gold)" data-i="pl.yt">Open on YouTube</a></div>
+</div>
 
 <script>
 const V=[
- // [id, game, type, caption]
- ["20b4KG4FdVY","Victoria 3","sale",""],["J_51cUsI-CI","Victoria 3","sale",""],["B6Bc_TYOT9w","Victoria 3","sale",""],
- ["j8QIzT4SsY4","Victoria 3","sale",""],["KCKsxic_Dyk","Victoria 3","sale",""],["vnIOfBNx5kc","Victoria 3","sale","Fourth Anniversary Sale"],
- ["nRc5T-oJE5E","Victoria 3","sale","Autumn Sale"],["Ebml5OUIG2w","Victoria 3","sale","70% off sale"],
- ["diJ9mLUMiAw","Hearts of Iron IV","sale",""],["KvAc9RlUtCM","Hearts of Iron IV","sale",""],["F2EEJhX6kRg","Hearts of Iron IV","sale",""],
- ["uyyXRNoU_Tc","Hearts of Iron IV","sale",""],["_MkENkUR9uQ","Hearts of Iron IV","sale","Sale with a MacArthur and Montgomery cameo"],
- ["qPmca7LobIE","Surviving Mars: Relaunched","sale",""],
- ["UJ3E_dOPOdE","Victoria 3","content",""],["xI53sD6orxw","Victoria 3","content",""],["LkXcQmQLA0o","Victoria 3","content",""],
- ["52JLbKYjAcU","Victoria 3","content",""],["2u5TQGOhUHI","Victoria 3","content","Engagement: pause on your next DLC"],
- ["MAwLDXPR82g","Victoria 3","content","Open beta announcement 1"],["H4fovDM8zEQ","Victoria 3","content","Open beta announcement 2"],
- ["xAcCrPyvrJg","Hearts of Iron IV","content",""],["yMCCripMeIQ","Hearts of Iron IV","content",""],["UZUDsgcA5WE","Hearts of Iron IV","content",""],
- ["-6m-RrrE-M4","Hearts of Iron IV","content","HOIloween special with MacArthur and Montgomery"]
+ ["_MkENkUR9uQ","Hearts of Iron IV","sale",{en:"Sale with a MacArthur and Montgomery cameo",es:"Rebajas con cameo de MacArthur y Montgomery"}],
+ ["diJ9mLUMiAw","Hearts of Iron IV","sale"],["KvAc9RlUtCM","Hearts of Iron IV","sale"],["F2EEJhX6kRg","Hearts of Iron IV","sale"],["uyyXRNoU_Tc","Hearts of Iron IV","sale"],
+ ["-6m-RrrE-M4","Hearts of Iron IV","content",{en:"HOIloween special with MacArthur and Montgomery",es:"Especial HOIloween con MacArthur y Montgomery"}],
+ ["xAcCrPyvrJg","Hearts of Iron IV","content"],["yMCCripMeIQ","Hearts of Iron IV","content"],["UZUDsgcA5WE","Hearts of Iron IV","content"],
+ ["vnIOfBNx5kc","Victoria 3","sale",{en:"Fourth Anniversary Sale",es:"Rebajas del cuarto aniversario"}],
+ ["nRc5T-oJE5E","Victoria 3","sale",{en:"Autumn Sale",es:"Rebajas de otoño"}],
+ ["Ebml5OUIG2w","Victoria 3","sale",{en:"70% off sale",es:"Rebajas del 70%"}],
+ ["20b4KG4FdVY","Victoria 3","sale"],["J_51cUsI-CI","Victoria 3","sale"],["B6Bc_TYOT9w","Victoria 3","sale"],["j8QIzT4SsY4","Victoria 3","sale"],["KCKsxic_Dyk","Victoria 3","sale"],
+ ["2u5TQGOhUHI","Victoria 3","content",{en:"Engagement: pause on your next DLC",es:"Engagement: pausa en tu próximo DLC"}],
+ ["MAwLDXPR82g","Victoria 3","content",{en:"Open beta announcement 1",es:"Anuncio de la beta abierta 1"}],
+ ["H4fovDM8zEQ","Victoria 3","content",{en:"Open beta announcement 2",es:"Anuncio de la beta abierta 2"}],
+ ["UJ3E_dOPOdE","Victoria 3","content"],["xI53sD6orxw","Victoria 3","content"],["LkXcQmQLA0o","Victoria 3","content"],["52JLbKYjAcU","Victoria 3","content"],
+ ["qPmca7LobIE","Surviving Mars: Relaunched","sale"]
 ];
-const label={sale:"Sale trailer",content:"Content video"};
+const T={es:{
+"nav.intro":"Intro","nav.featured":"Destacado","nav.work":"Trabajos","nav.process":"Proceso","nav.about":"Sobre mí",
+"hero.kick":"Productor y creador de vídeo · Madrid",
+"hero.h1":"Tráilers y vídeo corto <em>para juegos de estrategia</em>",
+"hero.lede":"Hago tráilers, vídeos de rebajas y campañas de vídeo corto para los juegos de Paradox Interactive. Todos los vídeos de esta página los he hecho yo, del concepto y el guion a la edición, las aprobaciones y la entrega en fechas fijas de lanzamiento y rebajas.",
+"hero.watch":"Ver los trabajos","hero.cv":"Descargar CV","hero.contact":"Contacto","hero.full":"Ver con sonido",
+"hero.games":"Hearts of Iron IV · Victoria 3 · Afterworld · antes Crusader Kings III y Surviving Mars: Relaunched",
+"st.1":"vídeos para juegos de Paradox","st.2":"visualizaciones en YouTube de tráilers de lanzamiento y rebajas","st.3":"visualizaciones en la campaña récord de Hearts of Iron IV","st.4":"canal de TikTok de Victoria 3 lanzado desde cero",
+"f.kick":"Trabajo destacado","f.h2":"Tres proyectos y lo que me enseñó cada uno",
+"c1.h":"Una serie de comedia de cuatro episodios en una semana de 20 horas",
+"c1.a":"<b>La idea.</b> Los jugadores de estrategia pasan cientos de horas en campañas serias de la guerra mundial y luego comparten lo más absurdo que les ha pasado en ellas. Las historias secundarias de los juegos de Yakuza demuestran que un mundo serio se quiere más cuando le dejas ser ridículo diez minutos. Así que, en vez de explicar el juego, la serie contó las historias que los jugadores ya se cuentan entre ellos: \"Me reencarné como mariscal de campo y ahora estoy atrapado en una playa\".",
+"c1.b":"<b>Qué hice.</b> Concepto, guion, enfoque visual, edición y publicación de los cuatro episodios, además del calendario habitual de tráilers.",
+"c1.c":"Los episodios que abren con un momento que el jugador ya ha vivido funcionan antes que los que necesitan contexto, así que desde entonces cada brief empieza con unos primeros tres segundos reconocibles.",
+"c2.h":"Rebajas de aniversario: el gancho estaba en un tráiler de hace diez años",
+"c2.a":"<b>El problema.</b> El vídeo de rebajas tenía la animación del DLC, tráilers oficiales y gameplay, pero el arranque se quedaba corto.",
+"c2.b":"<b>Qué hice.</b> Revisé todos los tráilers oficiales de Hearts of Iron IV hasta el anuncio de 2016. El primero ponía imágenes reales bajo un discurso de Churchill, así que me quedé solo con el discurso para construir la tensión del nuevo vídeo.",
+"c2.c":"Tu propio archivo está lleno de ganchos, y cada gancho hace una promesa: algunos lo leyeron como el anuncio de Hearts of Iron V, un recordatorio de saber exactamente qué dicen los primeros segundos.",
+"c3.h":"Lanzar un canal de TikTok desde cero",
+"c3.a":"<b>El inicio.</b> El primer vídeo fue de engagement para saludar a los jugadores; después el canal encontró su ritmo con vídeos de rebajas con un giro divertido y anuncios de todo tipo, incluida la beta abierta.",
+"c3.b":"<b>Lo que mejor funcionó.</b> Los trenes. Un vídeo sobre los ferrocarriles de Victoria 3 para el Train Fest de Steam generó más engagement que cualquier otro del canal.",
+"c3.c":"Un juego de economía y política se vuelve emocionante en treinta segundos en cuanto encuentras eso de lo que sus jugadores ya adoran hablar.",
+"w.kick":"Trabajos · 25 vídeos","w.h2":"Tráilers de rebajas y vídeos de contenido",
+"w.p":"Publicados en los canales de Paradox en YouTube Shorts, TikTok e Instagram Reels. Abre cualquier vídeo para verlo a pantalla completa y desliza o usa las flechas para pasar al siguiente.",
+"w.all":"Todos","w.sale":"Tráilers de rebajas","w.content":"Vídeos de contenido","w.reel":"Ver como reel",
+"p.kick":"Cómo trabajo","p.h2":"Del brief al siguiente brief","p.s1":"Paso 1","p.s2":"Paso 2","p.s3":"Paso 3","p.s4":"Paso 4",
+"p.t1":"Brief","p.t2":"Concepto y guion","p.t3":"Edición y versiones","p.t4":"Publicar y medir",
+"p.d1":"Qué tiene que conseguir la rebaja, el lanzamiento o el momento de comunidad, y para quién.",
+"p.d2":"Una idea clara y un gancho que el jugador reconoce en los primeros tres segundos.",
+"p.d3":"Versiones separadas para YouTube, TikTok e Instagram, dentro de las guías de marca.",
+"p.d4":"Aprobaciones con marketing, comunidad y desarrollo; después los números deciden el siguiente vídeo.",
+"a.kick":"Sobre mí",
+"a.p1":"Productor y creador de contenido en Paradox Interactive desde diciembre de 2025. Soy responsable de la creación y publicación de contenido de Hearts of Iron IV, Victoria 3 y Afterworld, y antes de Crusader Kings III y Surviving Mars: Relaunched. Mi trabajo incluye tráilers de lanzamiento y rebajas, la serie de comedia de cuatro episodios de Hearts of Iron IV y el canal de TikTok de Victoria 3, con publicación en TikTok, YouTube, Instagram, Facebook, Threads, X y Bluesky.",
+"a.p2":"Antes de Paradox fui Subdirector y Director en funciones en Estrella Clima Profesional, donde negocié con proveedores como Daikin, Mitsubishi y Samsung y creé la web y los sistemas de captación que aumentaron los leads un 75%. En paralelo llevé campañas para cinco empresas en Suiza, España y Alemania en SwissExistent.",
+"a.k1":"Producción","a.k2":"Edición","a.k3":"Plataformas","a.k4":"Idiomas","a.plan":"Planificación de proyectos",
+"a.en":"Inglés C2","a.ru":"Ruso C2","a.es":"Español C1","a.de":"Alemán A2",
+"a.touch":"Contacto","a.open":"Abierto a puestos de producción y vídeo, presenciales en Madrid o en remoto, y a encargos freelance de tráilers.",
+"a.copy":"Copiar","a.email":"Escríbeme","a.cv":"CV (PDF)",
+"e.kick":"Fundido a negro","e.h2":"¿Tienes un juego que necesita un tráiler, o un equipo que necesita un productor?","e.btn":"Escríbeme",
+"foot":"Todos los vídeos los hice yo para juegos de Paradox Interactive. Los títulos pertenecen a sus propietarios.",
+"pl.close":"Cerrar","pl.yt":"Abrir en YouTube"
+}};
+const typeName={en:{sale:"Sale trailer",content:"Content video"},es:{sale:"Tráiler de rebajas",content:"Vídeo de contenido"}};
+const L={copied:{en:"Copied",es:"Copiado"},sel:{en:"Selected",es:"Seleccionado"},copy:{en:"Copy",es:"Copiar"},vids:{en:["video","videos"],es:["vídeo","vídeos"]}};
+let lang="en", filter="all", list=[], cur=0;
+const EN={};document.querySelectorAll("[data-i]").forEach(el=>EN[el.dataset.i]=el.dataset.html!==undefined?el.innerHTML:el.textContent);
+const titleOf=v=>v[3]?v[3][lang]:typeName[lang][v[2]];
+function setLang(l){
+  lang=l;document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(el=>{const k=el.dataset.i;const s=l==="en"?EN[k]:(T.es[k]??EN[k]);if(el.dataset.html!==undefined)el.innerHTML=s;else el.textContent=s;});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===l));
+  try{localStorage.setItem("lang",l)}catch(_){}
+  render();reelShow();
+}
+/* bins */
 const order=["Hearts of Iron IV","Victoria 3","Surviving Mars: Relaunched"];
-function render(f){
+function render(){
   const bins=document.getElementById("bins");bins.innerHTML="";
+  list=V.filter(v=>filter==="all"||v[2]===filter);
   order.forEach(g=>{
-    const items=V.filter(v=>v[1]===g&&(f==="all"||v[2]===f));
-    if(!items.length)return;
+    const items=list.filter(v=>v[1]===g);if(!items.length)return;
     const sec=document.createElement("div");sec.className="bin";
-    sec.innerHTML=`<div class="bin-head"><h3>${g}</h3><span class="tc">${items.length} ${items.length===1?"video":"videos"}</span></div><div class="grid"></div>`;
+    const w=L.vids[lang][items.length===1?0:1];
+    sec.innerHTML=`<div class="bin-head"><h3>${g}</h3><span class="tc">${items.length} ${w}</span></div><div class="grid"></div>`;
     const grid=sec.querySelector(".grid");
-    items.forEach(([id,game,type,cap])=>{
-      const el=document.createElement("div");el.className="clip";
-      const title=cap||label[type];
-      el.innerHTML=`<div class="player"><button type="button" aria-label="Play: ${title}, ${game}"><img loading="lazy" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" onerror="this.style.visibility='hidden'"><span class="badge">${label[type]}</span><span class="play"></span></button></div>
-      <div class="cap">${title}<br><a href="https://www.youtube.com/shorts/${id}" target="_blank" rel="noopener">Open on YouTube</a></div>`;
-      el.querySelector("button").addEventListener("click",e=>{
-        const p=e.currentTarget.parentNode;
-        p.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&rel=0" title="${title}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-      });
-      grid.appendChild(el);
+    items.forEach(v=>{
+      const i=list.indexOf(v);
+      const b=document.createElement("button");b.type="button";b.className="clip";
+      b.setAttribute("aria-label",`${titleOf(v)}, ${g}`);
+      b.innerHTML=`<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${v[0]}/hqdefault.jpg" alt="" onerror="this.style.visibility='hidden'"><span class="badge">${typeName[lang][v[2]]}</span><span class="play"></span><span class="n">${String(i+1).padStart(2,"0")}</span></div><div class="cap">${titleOf(v)}</div>`;
+      b.addEventListener("click",()=>openP(i,b));grid.appendChild(b);
     });
     bins.appendChild(sec);
   });
 }
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
-  render(t.dataset.f);
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+  filter=c.dataset.f;document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c));render();
 }));
-render("all");
+/* player */
+const P=document.getElementById("player"),scr=document.getElementById("screen");let opener=null;
+function load(i){
+  cur=(i+list.length)%list.length;const v=list[cur];
+  scr.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${v[0]}?autoplay=1&playsinline=1&rel=0&modestbranding=1" title="${titleOf(v)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  document.getElementById("p-game").textContent=v[1];
+  document.getElementById("p-name").textContent=titleOf(v);
+  document.getElementById("p-count").textContent=`${String(cur+1).padStart(2,"0")} / ${String(list.length).padStart(2,"0")}`;
+  document.getElementById("p-yt").href=`https://www.youtube.com/shorts/${v[0]}`;
+}
+function openP(i,from){opener=from||null;P.hidden=false;document.body.classList.add("lock");load(i);document.getElementById("p-close").focus();}
+function closeP(){P.hidden=true;scr.innerHTML="";document.body.classList.remove("lock");if(opener)opener.focus();}
+document.getElementById("p-close").onclick=closeP;
+document.getElementById("p-prev").onclick=()=>load(cur-1);
+document.getElementById("p-next").onclick=()=>load(cur+1);
+document.getElementById("playall").onclick=e=>openP(0,e.currentTarget);
+P.addEventListener("click",e=>{if(e.target===P)closeP()});
+document.addEventListener("keydown",e=>{if(P.hidden)return;if(e.key==="Escape")closeP();if(e.key==="ArrowRight")load(cur+1);if(e.key==="ArrowLeft")load(cur-1);});
+let sx=null,sy=null;
+P.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+P.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))load(cur+(dx<0?1:-1));else if(Math.abs(dy)>70&&Math.abs(dy)>Math.abs(dx))load(cur+(dy<0?1:-1));sx=null;},{passive:true});
+/* hero reel: muted autoplay of one short, cycling every 14s */
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let ri=0;const phone=document.getElementById("phone");
+function reelShow(){
+  const v=V[ri];
+  document.getElementById("reel-n").textContent=`${String(ri+1).padStart(2,"0")} / ${V.length}`;
+  document.getElementById("reel-cap").textContent=v[1];
+  const old=phone.querySelector("iframe");if(old)old.remove();
+  const img=document.getElementById("reel-img");img.src=`https://i.ytimg.com/vi/${v[0]}/hqdefault.jpg`;img.style.visibility="";
+  if(!reduce){const f=document.createElement("iframe");f.title=titleOf(v);f.allow="autoplay; encrypted-media";
+    f.src=`https://www.youtube-nocookie.com/embed/${v[0]}?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=${v[0]}&rel=0&modestbranding=1`;
+    f.style.pointerEvents="none";phone.insertBefore(f,phone.querySelector(".ov"));}
+}
+const reelPicks=[0,5,9,17,18,12,1];let rp=0;
+if(!reduce)setInterval(()=>{if(document.hidden||!P.hidden)return;rp=(rp+1)%reelPicks.length;ri=reelPicks[rp];reelShow();},14000);
+document.getElementById("reel-open").onclick=e=>{filter="all";document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f==="all"));render();openP(list.indexOf(V[ri]),e.currentTarget);};
+/* timeline playhead + timecode + active clip */
+const trk=document.getElementById("track"),ph=document.getElementById("playhead"),clk=document.getElementById("clock");
+const links=[...trk.querySelectorAll("a")];
+function tick(){
+  const max=document.documentElement.scrollHeight-innerHeight;const p=max>0?Math.min(1,scrollY/max):0;
+  ph.style.left=`calc(${(p*100).toFixed(2)}% - 1px)`;
+  const total=150*25,fr=Math.round(p*total),s=Math.floor(fr/25);
+  clk.textContent=`00:${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}:${String(fr%25).padStart(2,"0")}`;
+  let on="top";document.querySelectorAll("[data-sec]").forEach(sec=>{if(sec.getBoundingClientRect().top<innerHeight*.4)on=sec.id;});
+  links.forEach(a=>a.classList.toggle("on",a.dataset.s===on));
+}
+addEventListener("scroll",()=>requestAnimationFrame(tick),{passive:true});addEventListener("resize",tick);
+/* stats count-up (final values are already in the HTML) */
+if(!reduce&&"IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;io.unobserve(en.target);
+    const el=en.target,to=+el.dataset.count,suf=el.dataset.suf||"",t0=performance.now();
+    const step=t=>{const k=Math.min(1,(t-t0)/900);el.textContent=Math.round(to*(1-Math.pow(1-k,3)))+suf;if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);
+  }),{threshold:.6});
+  document.querySelectorAll("[data-count]").forEach(el=>io.observe(el));
+}
+/* copy */
 document.getElementById("copy").addEventListener("click",async e=>{
   const b=e.currentTarget;
-  try{await navigator.clipboard.writeText("idare.mediastudio@gmail.com");b.textContent="Copied";}
-  catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById("mail"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected";}
-  setTimeout(()=>b.textContent="Copy",1800);
+  try{await navigator.clipboard.writeText("idare.mediastudio@gmail.com");b.textContent=L.copied[lang];}
+  catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById("mail"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent=L.sel[lang];}
+  setTimeout(()=>b.textContent=L.copy[lang],1800);
 });
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+let start="en";try{start=localStorage.getItem("lang")||((navigator.language||"").toLowerCase().startsWith("es")?"es":"en")}catch(_){}
+setLang(start);tick();
 </script>
 </body>
 </html>
