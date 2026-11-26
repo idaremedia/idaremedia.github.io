@@ -114,6 +114,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .windows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(36px,5vw,56px)}
 .win{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .win.wide{grid-column:span 2}
+.win.full{grid-column:1/-1}
 .win-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 10px 10px 16px;border-bottom:1px solid var(--line);background:var(--panel2)}
 .win-h .tc{color:var(--gold)}
 .win-h a{font:500 .85rem var(--body);text-decoration:none;padding:8px 10px;min-height:36px;display:inline-flex;align-items:center;border-radius:999px}
@@ -133,7 +134,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .win-about{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center}
 .win-about img{width:72px;height:72px;border-radius:50%;object-fit:cover}
 @media (max-width:980px){.windows{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.windows{grid-template-columns:1fr}.win.wide{grid-column:auto}.mini-clips{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.windows{grid-template-columns:1fr}.win.wide,.win.full{grid-column:auto}.mini-clips{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* ===== work ===== */
 .filters{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:28px}
@@ -199,7 +200,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .post .tags{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
 .pics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:640px}
 .pics figure{margin:0;display:grid;gap:6px}
-.pics img{border-radius:10px;border:1px solid var(--line);aspect-ratio:4/5;object-fit:cover;width:100%}
+.pics img{border-radius:10px;border:1px solid var(--line);width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+@media (max-width:520px){.pics{grid-template-columns:1fr;max-width:none}.pics img{aspect-ratio:auto}}
 .pics figcaption{font-size:.8rem;color:var(--muted)}
 .lang-note{font-size:.86rem;color:var(--muted)}
 
@@ -303,8 +305,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <a href="#work" data-v="work" style="--w:1.6"><b>01</b><span data-i="nav.work">Work</span></a>
       <a href="#cases" data-v="cases" style="--w:1.6"><b>02</b><span data-i="nav.cases">Case studies</span></a>
       <a href="#writing" data-v="writing" style="--w:1.4"><b>03</b><span data-i="nav.writing">Writing</span></a>
-      <a href="#toolkit" data-v="toolkit" style="--w:1.2"><b>04</b><span data-i="nav.toolkit">Toolkit</span></a>
-      <a href="#about" data-v="about" style="--w:1.1"><b>05</b><span data-i="nav.about">About</span></a>
+      <a href="#toolkit" data-v="toolkit" style="--w:1.1"><b>04</b><span data-i="nav.toolkit">Toolkit</span></a>
+      <a href="#credentials" data-v="credentials" style="--w:1.3"><b>05</b><span data-i="nav.creds">Credentials</span></a>
+      <a href="#about" data-v="about" style="--w:1.1"><b>06</b><span data-i="nav.about">About</span></a>
       <span class="playhead" id="playhead"></span>
     </nav>
   </div>
@@ -371,12 +374,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <article class="win">
         <div class="win-h"><span class="tc" data-i="w4.h">04 · Toolkit</span><a href="#toolkit" data-i="open">Open →</a></div>
         <div class="win-b">
-          <div class="cert main"><b>Project Management Professional (PMP)</b><span class="tc">2026</span><span class="by">Project Management Institute</span></div>
-          <p class="note" data-i="w4.n">Brief → concept and script → platform versions → ship and measure. Plus the tools, certifications and recommendations behind it.</p>
+          <p style="color:var(--soft);font-size:.92rem" data-i="w4.n">Brief → concept and script → platform versions → ship and measure.</p>
+          <div class="tagrow"><span>DaVinci Resolve</span><span>Premiere Pro</span><span>After Effects</span><span>Jira</span><span>Asana</span></div>
         </div>
       </article>
       <article class="win">
-        <div class="win-h"><span class="tc" data-i="w5.h">05 · About</span><a href="#about" data-i="open">Open →</a></div>
+        <div class="win-h"><span class="tc" data-i="w6.h">05 · Credentials</span><a href="#credentials" data-i="open">Open →</a></div>
+        <div class="win-b">
+          <div class="cert main"><b>Project Management Professional (PMP)</b><span class="tc">2026</span><span class="by">Project Management Institute</span></div>
+          <p class="note" data-i="w6.n">Plus Atlassian Jira training, HarvardX, and recommendations from my managers and my course leader.</p>
+        </div>
+      </article>
+      <article class="win full">
+        <div class="win-h"><span class="tc" data-i="w5.h">06 · About</span><a href="#about" data-i="open">Open →</a></div>
         <div class="win-b">
           <div class="win-about"><img src="photo.jpg" alt="" loading="lazy"><p style="color:var(--soft);font-size:.92rem" data-i="w5.p">Producer in Madrid. PMP certified. English C2, Spanish C1, Russian and Tatar native.</p></div>
           <div class="links" style="font-size:.9rem"><a href="#about" data-i="a.touch">Get in touch</a><a href="https://www.linkedin.com/in/aidar-rizatdinov-326237200/" target="_blank" rel="noopener">LinkedIn</a><a href="Aidar-Rizatdinov-CV.pdf">CV</a></div>
@@ -701,10 +711,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       </div>
     </div>
   </section>
-  <section id="credentials">
+
+</div>
+
+<!-- ================= CREDENTIALS ================= -->
+<div data-view="credentials" hidden>
+  <div class="wrap vhead">
+    <div><span class="tc" data-i="r.kick">05 · Recommendations and certifications</span><h1 tabindex="-1" data-i="r.h2">What others say, and what I have proven</h1></div>
+    <a class="back" href="#" data-i="back">← Back to studio</a>
+  </div>
+  <section style="border-top:0;padding-top:24px">
     <div class="wrap">
-      <div class="sec-head"><span class="tc" data-i="r.kick">Recommendations and certifications</span><h2 data-i="r.h2">What others say, and what I have proven</h2></div>
-      <div class="creds">
+            <div class="creds">
         <div class="quotes">
           <figure class="quote">
             <p class="big" data-i="r.q1">My managers at Paradox Interactive have told me they value my content creation skills and the quality of work I bring to the team.</p>
@@ -731,7 +749,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 <!-- ================= ABOUT ================= -->
 <div data-view="about" hidden>
   <div class="wrap vhead">
-    <div><span class="tc" data-i="a.kick">05 · About</span><h1 tabindex="-1">Aidar Rizatdinov</h1></div>
+    <div><span class="tc" data-i="a.kick">06 · About</span><h1 tabindex="-1">Aidar Rizatdinov</h1></div>
     <a class="back" href="#" data-i="back">← Back to studio</a>
   </div>
   <section style="border-top:0;padding-top:24px">
@@ -824,8 +842,8 @@ const T={es:{
 "hero.games":"Hearts of Iron IV · Victoria 3 · Afterworld · antes Crusader Kings III y Surviving Mars: Relaunched",
 "st.1":"tráilers y campañas para juegos de Paradox","st.2":"visualizaciones en YouTube de tráilers de lanzamiento y rebajas","st.3":"visualizaciones en la campaña récord de Hearts of Iron IV","st.4":"canal de TikTok de Victoria 3 lanzado desde cero",
 "w1.h":"01 · Trabajos","w1.n":"25 tráilers de rebajas y vídeos de contenido. Se abren a pantalla completa; desliza para el siguiente.",
-"w2.h":"02 · Casos","w3.h":"03 · Escritos","w4.h":"04 · Herramientas","w5.h":"05 · Sobre mí",
-"w4.n":"Brief → concepto y guion → versiones por plataforma → publicar y medir. Además de las herramientas, certificaciones y recomendaciones que lo respaldan.",
+"w2.h":"02 · Casos","w3.h":"03 · Escritos","w4.h":"04 · Herramientas","w5.h":"06 · Sobre mí","w6.h":"05 · Credenciales","nav.creds":"Credenciales","w6.n":"Además de la formación en Jira de Atlassian, HarvardX y las recomendaciones de mis responsables y de mi directora de grado.",
+"w4.n":"Brief → concepto y guion → versiones por plataforma → publicar y medir.",
 "w5.p":"Productor en Madrid. Certificación PMP. Inglés C2, español C1, ruso y tártaro nativos.",
 "cs1.t":"Una serie de comedia en una semana de 20 horas","cs1.s":"Brief → propuesta → 4 episodios → meme de la comunidad",
 "cs2.t":"El gancho de un tráiler de hace diez años","cs2.s":"Archivo → récord de engagement del canal",
@@ -876,14 +894,14 @@ const T={es:{
 "p.d3":"Versiones separadas para YouTube, TikTok e Instagram, dentro de las guías de marca.",
 "p.d4":"Aprobaciones con marketing, comunidad y desarrollo; después los números deciden el siguiente vídeo.",
 "k.kick":"Herramientas","k.h2":"Lo que abro cada día",
-"r.kick":"Recomendaciones y certificaciones","r.h2":"Lo que dicen de mí y lo que he demostrado",
+"r.kick":"05 · Recomendaciones y certificaciones","r.h2":"Lo que dicen de mí y lo que he demostrado",
 "r.q1":"Mis responsables en Paradox Interactive me han trasladado que valoran mucho mis habilidades de creación de contenido y la calidad de mi trabajo.",
 "r.w1":"Feedback de mis responsables",
 "r.q2":"Entre el 20% mejor de los estudiantes de grado a los que ha dado clase, incluidos los de la Universidad Carlos III de Madrid y la Universidad de Viena.",
 "r.q2b":"Su carta de recomendación destaca la motivación, la constancia, la capacidad analítica y la creatividad, ser buen líder y buen miembro de equipo que acepta bien el feedback, y haber cofundado un club de música estudiantil que actuó en eventos de la universidad.",
 "r.w2":"Directora del Grado en Marketing y Publicidad · MIUC · 2022",
 "r.c2":"Jira y planificación de proyectos","r.c4":"Programa Preferred Freelancer","r.c5":"Evaluaciones de aptitudes de LinkedIn","r.passed":"Superadas",
-"a.kick":"05 · Sobre mí",
+"a.kick":"06 · Sobre mí",
 "a.p1":"Social Media Content Creator en Paradox Interactive desde diciembre de 2025, donde llevo la producción y publicación de contenido de Hearts of Iron IV, Victoria 3 y Afterworld, y antes de Crusader Kings III y Surviving Mars: Relaunched. Mi trabajo incluye tráilers de lanzamiento y rebajas, la serie de comedia de cuatro episodios de Hearts of Iron IV y el canal de TikTok de Victoria 3, con publicación en TikTok, YouTube, Instagram, Facebook, Threads, X y Bluesky.",
 "a.p2":"Antes de Paradox fui Subdirector y Director en funciones en Estrella Clima Profesional, donde negocié con proveedores como Daikin, Mitsubishi y Samsung y creé la web y los sistemas de captación que aumentaron los leads un 75%. En paralelo llevé campañas para cinco empresas en Suiza, España y Alemania en SwissExistent.",
 "a.p3":"Juego a los títulos de Paradox desde Crusader Kings II, y la parte del trabajo que más me gusta tiene nombre: tener una idea, definir su visión, elegir lo visual y la música, planificar las escenas y darle vida desde cero. Eso es producción creativa, y es el puesto que busco ahora.",
@@ -916,9 +934,9 @@ function setLang(l){
 }
 
 /* ===== router: each tab is its own window ===== */
-const VIEWS=["home","work","cases","writing","toolkit","about"];
-const ALIAS={top:"home",featured:"cases",credentials:"toolkit",process:"toolkit"};
-const TITLES={home:"Trailers and campaigns, from idea to release",work:"Work",cases:"Case studies",writing:"Writing",toolkit:"Toolkit",about:"About"};
+const VIEWS=["home","work","cases","writing","toolkit","credentials","about"];
+const ALIAS={top:"home",featured:"cases",process:"toolkit"};
+const TITLES={home:"Trailers and campaigns, from idea to release",work:"Work",cases:"Case studies",writing:"Writing",toolkit:"Toolkit",credentials:"Credentials",about:"About"};
 function route(first){
   const raw=decodeURIComponent(location.hash.replace(/^#\/?/,""));
   let [v,sub]=raw.split("/");v=ALIAS[v]||v;if(!VIEWS.includes(v))v="home";
