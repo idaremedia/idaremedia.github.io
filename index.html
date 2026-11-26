@@ -201,6 +201,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:640px}
 .pics figure{margin:0;display:grid;gap:6px}
 .pics img{border-radius:10px;border:1px solid var(--line);width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+.pics figure.wide{grid-column:1/-1}.pics figure.wide img{aspect-ratio:1200/627;object-position:center}
 @media (max-width:520px){.pics{grid-template-columns:1fr;max-width:none}.pics img{aspect-ratio:auto}}
 .pics figcaption{font-size:.8rem;color:var(--muted)}
 .lang-note{font-size:.86rem;color:var(--muted)}
@@ -628,6 +629,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
           <div class="pics">
             <figure><img src="img/game-jam-madrid.jpg" alt="Game Jam Madrid title screen on a monitor and a laptop: Prompt it. Build it. Play it. 3 November 2026" loading="lazy" width="900" height="1144"><figcaption data-i="pic1">Game Jam Madrid, 3 November 2026</figcaption></figure>
             <figure><img src="img/tech-show-madrid.jpg" alt="Aidar with five other attendees at the Madrid Innovation stand, Tech Show Madrid at IFEMA" loading="lazy" width="800" height="1069"><figcaption data-i="pic2">Tech Show Madrid, IFEMA</figcaption></figure>
+            <figure class="wide"><img src="img/tfm-pass.jpg" alt="Professional visitor pass for Technology for Marketing, 4 and 5 November 2026, IFEMA Madrid, for Aidar Rizatdinov, Social Media Content Creator freelance, Paradox Interactive AB" loading="lazy" width="1200" height="627"><figcaption data-i="pic3">Professional visitor pass, Technology for Marketing</figcaption></figure>
           </div>
           <details><summary><span class="more" data-i="more">Read the full post</span><span class="less" data-i="less">Show less</span></summary><div class="full">
             <p>At the jam, teams had five hours at The Bridge to build a game that runs in a browser, and with credits for Rosebud AI, Meshy and ElevenLabs on the table, making art, 3D models and voices was almost free, so the expensive part was no longer making things but deciding which things deserved to exist at all.</p>
@@ -886,7 +888,7 @@ const T={es:{
 "s3.v1":"Anuncio de la beta abierta","s3.v2":"Engagement: pausa en tu próximo DLC",
 "wr.kick":"03 · Escritos","wr.h1":"Notas de la industria y de mi propio escritorio","wr.p":"Investigación de eventos de la industria en Madrid y lo que escribo en LinkedIn sobre producción, lanzamientos y videojuegos.",
 "wr.research2":"Investigación · El Tardeo de Madrid in Game · 25 de noviembre de 2026","wr.li":"En LinkedIn","wr.li2":"Publicaciones","wr.follow":"Sígueme en LinkedIn para nuevas publicaciones →",
-"more":"Leer la publicación completa","less":"Mostrar menos","pic1":"Game Jam Madrid, 3 de noviembre de 2026","pic2":"Tech Show Madrid, IFEMA",
+"more":"Leer la publicación completa","less":"Mostrar menos","pic1":"Game Jam Madrid, 3 de noviembre de 2026","pic2":"Tech Show Madrid, IFEMA","pic3":"Pase de visitante profesional, Technology for Marketing",
 "t.kick":"04 · Herramientas","t.h1":"Cómo trabajo y con qué trabajo",
 "p.kick":"Proceso","p.h2":"Del brief al siguiente brief","p.s1":"Paso 1","p.s2":"Paso 2","p.s3":"Paso 3","p.s4":"Paso 4",
 "p.t1":"Brief","p.t2":"Concepto y guion","p.t3":"Producción y versiones por plataforma","p.t4":"Publicar y medir",
